@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="parent" prefHeight="400.0" prefWidth="600.0" styleClass="dialog" stylesheets="@../utilities/stylesheet.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inventory.headset.AddNewController">
+   <children>
+      <Label layoutX="235.0" layoutY="31.0" text="Add new headset" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnsave" layoutX="449.0" layoutY="347.0" onMouseClicked="#Button_Actions" prefHeight="25.0" prefWidth="50.0" styleClass="btns" stylesheets="@../utilities/stylesheet.css" text="Save" AnchorPane.bottomAnchor="28.0" AnchorPane.rightAnchor="99.0" />
+      <JFXButton fx:id="btncancel" layoutX="517.0" layoutY="347.0" onMouseClicked="#Button_Actions" prefHeight="25.0" styleClass="btns" stylesheets="@../utilities/stylesheet.css" text="Cancel" AnchorPane.bottomAnchor="28.0" AnchorPane.rightAnchor="31.0" />
+      <VBox layoutX="50.0" layoutY="100.0" prefHeight="200.0" prefWidth="487.0">
+         <children>
+            <HBox prefHeight="41.0" prefWidth="487.0">
+               <children>
+                  <Label prefHeight="24.0" prefWidth="95.0" text="ID Product:  " textFill="WHITE">
+                     <opaqueInsets>
+                        <Insets right="10.0" />
+                     </opaqueInsets>
+                  </Label>
+                  <TextField fx:id="txtidproduct" />
+               </children>
+               <opaqueInsets>
+                  <Insets right="10.0" />
+               </opaqueInsets>
+            </HBox>
+            <HBox prefHeight="41.0" prefWidth="487.0">
+               <children>
+                  <Label prefHeight="24.0" prefWidth="94.0" text="Purchase date:  " textFill="WHITE">
+                     <opaqueInsets>
+                        <Insets right="10.0" />
+                     </opaqueInsets>
+                  </Label>
+                  <DatePicker fx:id="purchasedate" />
+               </children>
+               <opaqueInsets>
+                  <Insets right="10.0" />
+               </opaqueInsets>
+            </HBox>
+            <HBox prefHeight="41.0" prefWidth="487.0">
+               <children>
+                  <Label prefHeight="24.0" prefWidth="94.0" text="Status:  " textFill="WHITE">
+                     <opaqueInsets>
+                        <Insets right="10.0" />
+                     </opaqueInsets>
+                  </Label>
+                  <ComboBox fx:id="cmbstatus" prefWidth="150.0" />
+               </children>
+               <opaqueInsets>
+                  <Insets right="10.0" />
+               </opaqueInsets>
+            </HBox>
+            <HBox prefHeight="41.0" prefWidth="487.0">
+               <children>
+                  <Label prefHeight="24.0" prefWidth="94.0" text="Model:  " textFill="WHITE">
+                     <opaqueInsets>
+                        <Insets right="10.0" />
+                     </opaqueInsets>
+                  </Label>
+                  <ComboBox fx:id="cmbmodel" prefWidth="150.0" />
+               </children>
+               <opaqueInsets>
+                  <Insets right="10.0" />
+               </opaqueInsets>
+            </HBox>
+            <HBox prefHeight="41.0" prefWidth="487.0">
+               <children>
+                  <Label prefHeight="24.0" prefWidth="94.0" text="Supplier:  " textFill="WHITE">
+                     <opaqueInsets>
+                        <Insets right="10.0" />
+                     </opaqueInsets>
+                  </Label>
+                  <ComboBox fx:id="cmbsupplier" prefWidth="150.0" />
+               </children>
+               <opaqueInsets>
+                  <Insets right="10.0" />
+               </opaqueInsets>
+            </HBox>
+            <HBox prefHeight="41.0" prefWidth="487.0">
+               <children>
+                  <Label prefHeight="24.0" prefWidth="95.0" text="Invoice No:" textFill="WHITE">
+                     <opaqueInsets>
+                        <Insets right="10.0" />
+                     </opaqueInsets>
+                  </Label>
+                  <TextField fx:id="txtinvoice" />
+               </children>
+               <opaqueInsets>
+                  <Insets right="10.0" />
+               </opaqueInsets>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
