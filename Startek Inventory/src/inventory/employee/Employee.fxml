@@ -10,6 +10,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -151,8 +153,20 @@
                <left>
                   <AnchorPane prefHeight="500.0" prefWidth="150.0" BorderPane.alignment="CENTER">
                      <children>
-                        <ScrollPane layoutY="36.0" prefHeight="466.0" prefWidth="150.0" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="38.0" />
-                        <ListView fx:id="lsEID" layoutY="38.0" prefHeight="464.0" prefWidth="150.0" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="38.0" />
+                        <ImageView fx:id="imgemployee" fitHeight="130.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="14.0">
+                           <image>
+                              <Image url="@../images/default_employee.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+               </left>
+               <right>
+                  <AnchorPane prefHeight="525.0" prefWidth="170.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button fx:id="btnimportemployees" layoutX="29.0" layoutY="462.0" mnemonicParsing="false" onMouseClicked="#Import_Employees" styleClass="btns" text="Import Employees" AnchorPane.bottomAnchor="38.0" AnchorPane.rightAnchor="29.0" />
+                        <ScrollPane prefHeight="356.0" prefWidth="170.0" AnchorPane.bottomAnchor="131.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="38.0" />
+                        <ListView fx:id="lsEID" prefHeight="359.0" prefWidth="170.0" AnchorPane.bottomAnchor="128.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="38.0" />
                         <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="150.0">
                            <children>
                               <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="20" />
@@ -166,19 +180,6 @@
                               <Insets left="10.0" />
                            </padding>
                         </HBox>
-                     </children>
-                  </AnchorPane>
-               </left>
-               <right>
-                  <AnchorPane prefHeight="525.0" prefWidth="170.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <Button fx:id="btnimportemployees" layoutX="29.0" layoutY="462.0" mnemonicParsing="false" onMouseClicked="#Import_Employees" styleClass="btns" text="Import Employees" AnchorPane.bottomAnchor="38.0" AnchorPane.rightAnchor="29.0" />
-                        <ImageView fx:id="imgemployee" fitHeight="130.0" fitWidth="119.0" layoutX="26.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="14.0">
-                           <image>
-                              <Image url="@../images/default_employee.png" />
-                           </image>
-                        </ImageView>
-                        <ListView fx:id="lvassignations" layoutX="351.0" layoutY="153.0" prefHeight="250.0" prefWidth="149.0" AnchorPane.bottomAnchor="122.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="153.0" />
                      </children>
                   </AnchorPane>
                </right>
@@ -382,6 +383,24 @@
                      </children>
                   </AnchorPane>
                </center>
+               <bottom>
+                  <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <TableView prefHeight="100.0" prefWidth="524.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                        </TableView>
+                        <TableView prefHeight="100.0" prefWidth="384.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </HBox>
+               </bottom>
             </BorderPane>
          </children>
       </AnchorPane>
