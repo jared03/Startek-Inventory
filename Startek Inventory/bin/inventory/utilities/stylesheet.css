@@ -1,0 +1,71 @@
+.parent{
+    -fx-background-color: #fff;
+}
+.sidebar{
+    -fx-background-color: #2b2b2b;
+}
+.btns{
+    -fx-background-color: #d4d4d4;
+}
+.btns:hover{
+    -fx-background-color: #1b2438;
+    -fx-text-fill:  #FFF;
+}
+#btnSignin
+{
+-fx-background-color : #FFF;
+-fx-border-color: #808080;
+-fx-text-fill:  #000;
+}
+#btnSignin:hover
+{
+-fx-background-color : #949494;
+-fx-text-fill:  #FFF;
+}
+#btnSignin:pressed
+{
+-fx-background-color : #5c5c5c ;
+-fx-text-fill: #FFF;
+}
+
+#btnClose{
+	-fx-background-color: transparent;
+	-fx-text-fill: #ffffff;
+    -fx-border-style: none;
+    -fx-border-width: 1;
+    -fx-border-color: transparent;
+    -fx-border-insets: 0;
+}
+#btnClose:hover{
+	-fx-background-color: #fa1000;
+	-fx-text-fill: #ffffff;
+    -fx-border-style: none;
+    -fx-border-width: 1;
+    -fx-border-color: #fa1000;
+    -fx-border-insets: 0;
+
+}
+.panel{
+	-fx-background-color: #525252;
+}
+.btnsWindow:hover{
+    -fx-background-color: #828282;
+	-fx-text-fill: #ffffff;
+    -fx-border-style: none;
+    -fx-border-width: 1;
+    -fx-border-color: #828282;
+    -fx-border-insets: 0;
+}
+.btnsPanel:hover{
+    -fx-background-color: #525252;
+	-fx-text-fill: #ffffff;
+    -fx-border-style: none;
+    -fx-border-width: 1;
+    -fx-border-color: #525252;
+    -fx-border-insets: 0;
+}
+
+.dialog{
+	-fx-background-color: #363636;
+
+}
