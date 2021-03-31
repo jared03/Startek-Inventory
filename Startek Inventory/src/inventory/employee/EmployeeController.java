@@ -64,8 +64,6 @@ public class EmployeeController implements Initializable {
     @FXML
     private Button btnNetwork;
     @FXML
-    private Button btnimportemployees;
-    @FXML
     private Label lblfname;
     @FXML
     private Label lbllname;
@@ -302,35 +300,35 @@ public class EmployeeController implements Initializable {
         return e;
      }
 
-    @FXML
-    public void Import_Employees(MouseEvent event){
-       	FileChooser file = new FileChooser();
-    	Node node = (Node) event.getSource();
-    	Stage stage = (Stage) node.getScene().getWindow();
-    	if(event.getSource()==btnimportemployees){
-    		File selectedfile = file.showOpenDialog(stage);
-    		String path = selectedfile.getAbsolutePath();
-    		path = path.replace("\\", "\\\\");
-    		String sql = "LOAD DATA LOCAL INFILE '" + path + "' REPLACE INTO TABLE temp \n FIELDS TERMINATED BY ',' \n ENCLOSED BY '" + '"' + "' \n LINES TERMINATED BY '\\r\\n' \n IGNORE 1 LINES \n" +
-    		" (fname,lname,email,idemployee,statu,@hiredate,idsupervisor,jobtitle,description,country,site,clockid) \n"+
-    		"SET hiredate = STR_TO_DATE(@hiredate, '%m/%d/%Y');";
-        	String spimp = "CALL `inventory`.`sp_import_employees`();";
-        	try {
-				preparedStatement = con.prepareStatement(sql);
-				resultSet = preparedStatement.executeQuery(sql);
-				preparedStatement = con.prepareStatement(spimp);
-				resultSet = preparedStatement.executeQuery(spimp);
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-
-
-    	}
-
-
-    }
+//    @FXML
+//    public void Import_Employees(MouseEvent event){
+//       	FileChooser file = new FileChooser();
+//    	Node node = (Node) event.getSource();
+//    	Stage stage = (Stage) node.getScene().getWindow();
+//    	if(event.getSource()==btnimportemployees){
+//    		File selectedfile = file.showOpenDialog(stage);
+//    		String path = selectedfile.getAbsolutePath();
+//    		path = path.replace("\\", "\\\\");
+//    		String sql = "LOAD DATA LOCAL INFILE '" + path + "' REPLACE INTO TABLE temp \n FIELDS TERMINATED BY ',' \n ENCLOSED BY '" + '"' + "' \n LINES TERMINATED BY '\\r\\n' \n IGNORE 1 LINES \n" +
+//    		" (fname,lname,email,idemployee,statu,@hiredate,idsupervisor,jobtitle,description,country,site,clockid) \n"+
+//    		"SET hiredate = STR_TO_DATE(@hiredate, '%m/%d/%Y');";
+//        	String spimp = "CALL `inventory`.`sp_import_employees`();";
+//        	try {
+//				preparedStatement = con.prepareStatement(sql);
+//				resultSet = preparedStatement.executeQuery(sql);
+//				preparedStatement = con.prepareStatement(spimp);
+//				resultSet = preparedStatement.executeQuery(spimp);
+//
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//
+//
+//
+//    	}
+//
+//
+//    }
 
 
 }

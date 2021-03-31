@@ -3,12 +3,8 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
-<?import de.jensd.fx.glyphs.weathericons.WeatherIconView?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
-<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -23,15 +19,15 @@
 
 <AnchorPane fx:id="parent" prefHeight="600" prefWidth="1024.0" styleClass="parent" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inventory.inventory.InventoryController">
     <children>
-        <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="200.0" styleClass="sidebar" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <children>
-                <Label prefHeight="57.0" prefWidth="200.0" style="-fx-background-color: #242424;;" text="Admin Panel" textFill="WHITE">
-                    <padding>
-                        <Insets left="10.0" />
-                    </padding>
-                    <font>
-                        <Font name="Ebrima" size="18.0" />
-                    </font>
+      <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="200.0" styleClass="sidebar">
+         <children>
+            <Label prefHeight="57.0" prefWidth="200.0" style="-fx-background-color: #242424;;" text="Admin Panel" textFill="WHITE">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <font>
+                  <Font name="Ebrima" size="18.0" />
+               </font>
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -39,50 +35,49 @@
                      </image>
                   </ImageView>
                </graphic>
-                </Label>
-                <HBox alignment="CENTER_LEFT">
-                    <children>
+            </Label>
+            <HBox alignment="CENTER_LEFT">
+               <children>
                   <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="20" />
-                        <TextField prefHeight="40.0" prefWidth="276.0" promptText="Search" style="-fx-background-color: transparent; -fx-text-fill: #fff;" HBox.hgrow="ALWAYS">
-                            <font>
-                                <Font name="Calibri Light" size="14.0" />
-                            </font>
-                        </TextField>
-                    </children>
-                    <padding>
-                        <Insets left="10.0" />
-                    </padding>
-                    <VBox.margin>
-                        <Insets top="10.0" />
-                    </VBox.margin>
-                </HBox>
+                  <TextField prefHeight="40.0" prefWidth="276.0" promptText="Search" style="-fx-background-color: transparent; -fx-text-fill: #fff;" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Calibri Light" size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
             <JFXButton fx:id="btnDashboard" alignment="BASELINE_LEFT" onMouseClicked="#Panel_Action" prefHeight="40.0" prefWidth="292.0" styleClass="btnsPanel" text=" Dashboard" textFill="#b2b2b2">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="DASHBOARD" size="20" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnEmployee" alignment="BASELINE_LEFT" onMouseClicked="#Panel_Action" prefHeight="40.0" prefWidth="292.0" styleClass="btnsPanel" text=" Employees" textFill="#b2b2b2">
+            <JFXButton fx:id="btnEmployee" alignment="BASELINE_LEFT" graphicTextGap="7.0" onMouseClicked="#Panel_Action" prefHeight="40.0" prefWidth="292.0" styleClass="btnsPanel" text=" Employees" textFill="#b2b2b2">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="USER" size="20" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnHeadset" alignment="BASELINE_LEFT" onMouseClicked="#Panel_Action" prefHeight="40.0" prefWidth="292.0" styleClass="btnsPanel" text=" Headsets" textFill="#b2b2b2">
+            <JFXButton fx:id="btnReports" alignment="BASELINE_LEFT" graphicTextGap="9.0" onMouseClicked="#Panel_Action" prefHeight="40.0" prefWidth="292.0" styleClass="btnsPanel" text="Reports" textFill="#b2b2b2">
                <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="HEADPHONES" size="20" />
-               </graphic></JFXButton>
-            <JFXButton fx:id="btnLaptop" alignment="BASELINE_LEFT" onMouseClicked="#Panel_Action" prefHeight="40.0" prefWidth="292.0" styleClass="btnsPanel" text=" Laptops" textFill="#b2b2b2">
+                  <FontAwesomeIconView fill="WHITE" glyphName="FILE" size="20" />
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </JFXButton>
+            <JFXButton fx:id="btnParameters" alignment="BASELINE_LEFT" onMouseClicked="#Panel_Action" prefHeight="40.0" prefWidth="292.0" styleClass="btnsPanel" text="Parameters" textFill="#b2b2b2">
                <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="LAPTOP" size="20" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="COGS" size="20" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnDesktop" alignment="BASELINE_LEFT" onMouseClicked="#Panel_Action" prefHeight="40.0" prefWidth="292.0" styleClass="btnsPanel" text=" PC Inventory" textFill="#b2b2b2">
+            <JFXButton fx:id="btnInventory" alignment="BASELINE_LEFT" graphicTextGap="3.0" onMouseClicked="#Panel_Action" prefHeight="40.0" prefWidth="292.0" styleClass="btnsPanel" text=" Inventory" textFill="#b2b2b2">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="SERVER" size="20" />
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="btnMonitor" alignment="BASELINE_LEFT" onMouseClicked="#Panel_Action" prefHeight="40.0" prefWidth="292.0" styleClass="btnsPanel" text=" Monitors" textFill="#b2b2b2">
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="TV" size="20" />
                </graphic>
             </JFXButton>
             <JFXButton fx:id="btnNetwork" alignment="BASELINE_LEFT" onMouseClicked="#Panel_Action" prefHeight="40.0" prefWidth="292.0" styleClass="btnsPanel" text=" Network Devices" textFill="#b2b2b2">
@@ -90,31 +85,11 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="WIFI" size="17" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnPeripheral" alignment="BASELINE_LEFT" onMouseClicked="#Panel_Action" prefHeight="40.0" prefWidth="292.0" styleClass="btnsPanel" text=" Peripherals" textFill="#b2b2b2">
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="KEYBOARD_ALT" size="20" />
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="btnProxy" alignment="BASELINE_LEFT" onMouseClicked="#Panel_Action" prefHeight="40.0" prefWidth="292.0" styleClass="btnsPanel" text=" Proxy Cards" textFill="#b2b2b2">
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="CREDIT_CARD_ALT" size="17" />
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="btnCable" alignment="BASELINE_LEFT" onMouseClicked="#Panel_Action" prefHeight="40.0" prefWidth="292.0" styleClass="btnsPanel" text=" Cables &amp; Adapters" textFill="#b2b2b2">
-               <graphic>
-                  <WeatherIconView fill="WHITE" glyphName="LIGHTNING" size="20" />
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="btnMaterial" alignment="BASELINE_LEFT" onMouseClicked="#Panel_Action" prefHeight="40.0" prefWidth="292.0" styleClass="btnsPanel" text=" Materials" textFill="#b2b2b2">
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="COGS" size="20" />
-               </graphic>
-            </JFXButton>
-            </children>
-        </VBox>
+         </children>
+      </VBox>
       <AnchorPane layoutX="199.0" prefHeight="600.0" prefWidth="824.0" styleClass="panel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label alignment="CENTER" layoutX="1.0" layoutY="27.0" prefHeight="48.0" prefWidth="817.0" text="Dashboard" textFill="#b2b2b2" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
+            <Label alignment="CENTER" layoutX="1.0" layoutY="27.0" prefHeight="48.0" prefWidth="817.0" text="Inventory" textFill="#b2b2b2" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
@@ -146,18 +121,7 @@
                   </JFXButton>
                </children>
             </GridPane>
-            <AnchorPane layoutX="218.0" layoutY="89.0" prefHeight="100.0" prefWidth="300.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
-               <children>
-                  <LineChart layoutX="-96.0" layoutY="-124.0" prefHeight="150.0" prefWidth="824.0" AnchorPane.bottomAnchor="-12.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <xAxis>
-                      <CategoryAxis label="Month" prefHeight="0.0" prefWidth="784.0" side="BOTTOM" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis prefHeight="120.0" prefWidth="14.0" side="LEFT" tickLabelFill="WHITE" />
-                    </yAxis>
-                  </LineChart>
-               </children>
-            </AnchorPane>
+            <AnchorPane layoutX="218.0" layoutY="89.0" prefHeight="100.0" prefWidth="300.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0" />
          </children>
       </AnchorPane>
     </children>
