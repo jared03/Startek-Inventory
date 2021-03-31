@@ -36,23 +36,13 @@ public class DashboardController implements Initializable {
     @FXML
     private Button btnEmployee;
     @FXML
-    private Button btnHeadset;
+    private Button btnReports;
     @FXML
-    private Button btnLaptop;
+    private Button btnParameters;
     @FXML
-    private Button btnDesktop;
-    @FXML
-    private Button btnMonitor;
+    private Button btnInventory;
     @FXML
     private Button btnNetwork;
-    @FXML
-    private Button btnPeripheral;
-    @FXML
-    private Button btnProxy;
-    @FXML
-    private Button btnCable;
-    @FXML
-    private Button btnMaterial;
 
     private double xOffset = 0;
     private double yOffset = 0;
@@ -122,48 +112,36 @@ public class DashboardController implements Initializable {
                 System.err.println(ex.getMessage());
             }
     	}
-    	if (event.getSource() == btnHeadset){
+    	if (event.getSource() == btnReports){
     		try{
     			Node node = (Node) event.getSource();
                 Stage stage = (Stage) node.getScene().getWindow();
                 stage.close();
-                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/inventory/headset/Headset.fxml")));
+                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/inventory/reports/Report.fxml")));
                 stage.setScene(scene);
                 stage.show();
     		}catch (IOException ex) {
                 System.err.println(ex.getMessage());
             }
     	}
-    	if (event.getSource() == btnLaptop){
+    	if (event.getSource() == btnParameters){
     		try{
     			Node node = (Node) event.getSource();
                 Stage stage = (Stage) node.getScene().getWindow();
                 stage.close();
-                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/inventory/laptop/Laptop.fxml")));
+                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/inventory/parameters/Parameter.fxml")));
                 stage.setScene(scene);
                 stage.show();
     		}catch (IOException ex) {
                 System.err.println(ex.getMessage());
             }
     	}
-    	if (event.getSource() == btnDesktop){
+    	if (event.getSource() == btnInventory){
     		try{
     			Node node = (Node) event.getSource();
                 Stage stage = (Stage) node.getScene().getWindow();
                 stage.close();
-                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/inventory/Desktop/Desktop.fxml")));
-                stage.setScene(scene);
-                stage.show();
-    		}catch (IOException ex) {
-                System.err.println(ex.getMessage());
-            }
-    	}
-    	if (event.getSource() == btnMonitor){
-    		try{
-    			Node node = (Node) event.getSource();
-                Stage stage = (Stage) node.getScene().getWindow();
-                stage.close();
-                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/inventory/monitor/Monitor.fxml")));
+                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/inventory/inventory/Inventory.fxml")));
                 stage.setScene(scene);
                 stage.show();
     		}catch (IOException ex) {
@@ -176,54 +154,6 @@ public class DashboardController implements Initializable {
                 Stage stage = (Stage) node.getScene().getWindow();
                 stage.close();
                 Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/inventory/network_device/NetworkDevice.fxml")));
-                stage.setScene(scene);
-                stage.show();
-    		}catch (IOException ex) {
-                System.err.println(ex.getMessage());
-            }
-    	}
-    	if (event.getSource() == btnPeripheral){
-    		try{
-    			Node node = (Node) event.getSource();
-                Stage stage = (Stage) node.getScene().getWindow();
-                stage.close();
-                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/inventory/peripheral/Peripheral.fxml")));
-                stage.setScene(scene);
-                stage.show();
-    		}catch (IOException ex) {
-                System.err.println(ex.getMessage());
-            }
-    	}
-    	if (event.getSource() == btnProxy){
-    		try{
-    			Node node = (Node) event.getSource();
-                Stage stage = (Stage) node.getScene().getWindow();
-                stage.close();
-                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/inventory/proxy_card/ProxyCard.fxml")));
-                stage.setScene(scene);
-                stage.show();
-    		}catch (IOException ex) {
-                System.err.println(ex.getMessage());
-            }
-    	}
-    	if (event.getSource() == btnCable){
-    		try{
-    			Node node = (Node) event.getSource();
-                Stage stage = (Stage) node.getScene().getWindow();
-                stage.close();
-                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/inventory/cable_adapter/CableAdapter.fxml")));
-                stage.setScene(scene);
-                stage.show();
-    		}catch (IOException ex) {
-                System.err.println(ex.getMessage());
-            }
-    	}
-    	if (event.getSource() == btnMaterial){
-    		try{
-    			Node node = (Node) event.getSource();
-                Stage stage = (Stage) node.getScene().getWindow();
-                stage.close();
-                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/inventory/material/Material.fxml")));
                 stage.setScene(scene);
                 stage.show();
     		}catch (IOException ex) {

@@ -106,7 +106,7 @@ public class LoginController implements Initializable {
         String password = txtPassword.getText();
 
         //query
-        String sql = "SELECT * FROM Login Where username = ? and password = ?";
+        String sql = "SELECT * FROM login Where username = ? and password = ?";
 
         try {
         	if (!user.isEmpty()) {

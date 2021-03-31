@@ -16,7 +16,7 @@ public class DBConn {
     {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://JALFARO-TGH:3306/inventory", "admin", "admin");
+            Connection con = DriverManager.getConnection("jdbc:mysql://srt-server.ddns.net:3306/inventory", "admin", "M0ng00s3");
             return con;
         } catch (ClassNotFoundException | SQLException ex) {
             System.err.println("Database Connection : "+ex.getMessage());
