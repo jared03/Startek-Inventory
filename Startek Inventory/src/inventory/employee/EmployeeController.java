@@ -63,6 +63,7 @@ public class EmployeeController implements Initializable {
     private Button btnInventory;
     @FXML
     private Button btnNetwork;
+
     @FXML
     private Label lblfname;
     @FXML
@@ -107,7 +108,7 @@ public class EmployeeController implements Initializable {
             stage.setX(event.getScreenX()- xOffset);
             stage.setY(event.getScreenY()- yOffset);
     	});
-    	//Retrieves all employees into the listview
+  /*  	//Retrieves all employees into the listview
     	list = Employee_List();
     	filterItems = new FilteredList<>(list, e-> true);
     	lsEID.setItems(filterItems);
@@ -151,7 +152,7 @@ public class EmployeeController implements Initializable {
 	    		lblclockid.setText(newValue.getclockid());
     	    }
     	});
-
+*/
 
     }
 
