@@ -5,8 +5,10 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import inventory.employee.Employee;
 import inventory.utilities.DBConn;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +18,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -47,27 +51,7 @@ public class ReportController implements Initializable {
     @FXML
     private Button btnNetwork;
     @FXML
-    private Button btnadd;
-    @FXML
-    private Button btnassign;
-    @FXML
-    private Button btnaddsupp;
-    @FXML
-    private TextField serialfilter;
-    @FXML
-    private Label lblproduct;
-    @FXML
-    private Label lblstatus;
-    @FXML
-    private Label lblbrand;
-    @FXML
-    private Label lblmodel;
-    @FXML
-    private Label lblsupplier;
-    @FXML
-    private Label lblassigned;
-
-
+    private TreeView<String> tvDB;
 
 
 
@@ -86,6 +70,9 @@ public class ReportController implements Initializable {
             stage.setX(event.getScreenX()- xOffset);
             stage.setY(event.getScreenY()- yOffset);
     	});
+
+
+    	getTables();
 
 	}
 
@@ -188,6 +175,22 @@ public class ReportController implements Initializable {
                 System.err.println(ex.getMessage());
             }
     	}
+    }
+
+    public void getTables(){
+    	TreeItem<String> rootItem = new TreeItem<String> ("Database");
+    	String sql = "Select * From table_names";
+    	try {
+			preparedStatement = con.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery(sql);
+			while (resultSet.next()) {
+				TreeItem<String> item = new TreeItem<String> (resultSet.getString("table_name"));
+				rootItem.getChildren().add(item);
+            }
+			tvDB = new TreeView<String> (rootItem);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     }
 
     public ReportController(){
