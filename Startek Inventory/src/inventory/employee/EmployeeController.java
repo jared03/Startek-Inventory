@@ -7,14 +7,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 import inventory.utilities.DBConn;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,12 +29,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class EmployeeController implements Initializable {
 
@@ -38,11 +48,12 @@ public class EmployeeController implements Initializable {
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
     private ObservableList<Employee> list= FXCollections.observableArrayList();
+    private ObservableList<Assignation> listassign = FXCollections.observableArrayList();
     private FilteredList<Employee> filterItems;
     @FXML
     private TextField idfilter;
     @FXML
-    private ListView<Employee> lsEID;
+    private TableView<Employee> tvEID;
     @FXML
     private AnchorPane parent;
     @FXML
@@ -63,7 +74,14 @@ public class EmployeeController implements Initializable {
     private Button btnInventory;
     @FXML
     private Button btnNetwork;
-
+    @FXML
+    private Button btnAssign;
+    @FXML
+    private Button btnReceive;
+    @FXML
+    private Button btnDecomm;
+    @FXML
+    private Button btnLog;
     @FXML
     private Label lblfname;
     @FXML
@@ -89,7 +107,23 @@ public class EmployeeController implements Initializable {
     @FXML
     private ImageView imgemployee;
     @FXML
-    private ListView<String> lvassignations;
+    private TableView<Assignation> tvassignations;
+    @FXML
+    private TableView<String> tvactivitylog;
+    @FXML
+    private TableColumn<Employee,String> tcolEID;
+    @FXML
+    private TableColumn<Employee,String> tcolFullName;
+    @FXML
+    private TableColumn<Assignation,String> tcolidproduct;
+    @FXML
+    private TableColumn<Assignation,Date> tcolassigndate;
+    @FXML
+    private TableColumn<Assignation,String> tcolbrand;
+    @FXML
+    private TableColumn<Assignation,String> tcolmodel;
+    @FXML
+    private TableColumn<Assignation,String> tcolprice;
 
 
     private double xOffset = 0;
@@ -108,51 +142,74 @@ public class EmployeeController implements Initializable {
             stage.setX(event.getScreenX()- xOffset);
             stage.setY(event.getScreenY()- yOffset);
     	});
-  /*  	//Retrieves all employees into the listview
+   	//Retrieves all employees into the tableview
+    	tcolEID.setCellValueFactory(cellData -> cellData.getValue().idemployeeProperty());
+    	tcolFullName.setCellValueFactory(cellData -> cellData.getValue().fullnameProperty());
+    	tcolidproduct.setCellValueFactory(cellData -> cellData.getValue().idproductProperty());
+    	tcolassigndate.setCellValueFactory(cellData -> cellData.getValue().assigndateProperty());
+    	tcolbrand.setCellValueFactory(cellData -> cellData.getValue().brandProperty());
+    	tcolmodel.setCellValueFactory(cellData -> cellData.getValue().modelProperty());
+    	tcolprice.setCellValueFactory(cellData -> cellData.getValue().priceProperty());
+
     	list = Employee_List();
     	filterItems = new FilteredList<>(list, e-> true);
-    	lsEID.setItems(filterItems);
 
     	//Filters Employee's ID
     	idfilter.textProperty().addListener((observable, oldValue, newValue) ->
-        filterItems.setPredicate(str -> {
-            if (newValue == null || newValue.isEmpty())
+        filterItems.setPredicate(employee -> {
+            if (newValue == null || newValue.isEmpty()){
                return true;
-            if (str.getidemployee().toLowerCase().contains
-                  (newValue.toLowerCase()))
+            }
+            else if (employee.getidemployee().toLowerCase().contains
+                  (newValue.toLowerCase())){
                return true;
+            }
+            else if (employee.getfullname().toLowerCase().contains(newValue.toLowerCase())){
+            	return true;
+            }
             return false;
         }));
+    	SortedList<Employee> sortedData = new SortedList<>(filterItems);
 
-    	lsEID.getSelectionModel().setSelectionMode
-        (SelectionMode.SINGLE);
+    	sortedData.comparatorProperty().bind(tvEID.comparatorProperty());
 
-    	lsEID.setCellFactory(lv -> new ListCell<Employee>() {
+    	tvEID.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+    	tvassignations.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+    	tvEID.setItems(sortedData);
+
+    	/*tvEID.setRowFactory(lv -> new TableRow<Employee>() {
             @Override
             protected void updateItem(Employee item, boolean empty) {
                 super.updateItem(item, empty);
                 setText(empty || item == null ? "" : item.getidemployee());
             }
-        });
+        });*/
     	//Loads data from each employee into the labels
-    	lsEID.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Employee>() {
+    	tvEID.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Employee>() {
     	    @Override
     	    public void changed(ObservableValue<? extends Employee> observable, Employee oldValue, Employee newValue) {
+    	    	if(newValue != null){
+    	    			lblfname.setText(newValue.getfname());
+    	    			lbllname.setText(newValue.getlname());
+    	    			lblemail.setText(newValue.getemail());
+    	    			lblstatus.setText(newValue.getstatus());
+    	    			lblhiredate.setText(newValue.gethiredate().toString());
+    	    			lblsupervisor.setText(newValue.getsupervisor());
+    	    			lbldepartment.setText(newValue.getdescription());
+    	    			lbljobtitle.setText(newValue.getjobtitle());
+    	    			lblcountry.setText(newValue.getcountry());
+    	    			lblsite.setText(newValue.getsite());
+    	    			lblclockid.setText(newValue.getclockid());
 
-    	        lblfname.setText(newValue.getfname());
-    	        lbllname.setText(newValue.getlname());
-	    		lblemail.setText(newValue.getemail());
-	    		lblstatus.setText(newValue.getstatus());
-	    		lblhiredate.setText(newValue.gethiredate().toString());
-	    		lblsupervisor.setText(newValue.getsupervisor());
-	    		lbldepartment.setText(newValue.getdescription());
-	    		lbljobtitle.setText(newValue.getjobtitle());
-	    		lblcountry.setText(newValue.getcountry());
-	    		lblsite.setText(newValue.getsite());
-	    		lblclockid.setText(newValue.getclockid());
+    	    			loadAssignations(newValue.getidemployee());
+    	    			tvassignations.setItems(listassign);
+
+    	    	}
+
     	    }
+
     	});
-*/
 
     }
 
@@ -269,7 +326,19 @@ public class EmployeeController implements Initializable {
 			preparedStatement = con.prepareStatement(sql);
 			resultSet = preparedStatement.executeQuery(sql);
 			while (resultSet.next()) {
-				Employee e = createEmployee(resultSet);
+				Employee e = new Employee(resultSet.getString("fname"),
+						resultSet.getString("lname"),
+						resultSet.getString("email"),
+						resultSet.getString("idemployee"),
+						resultSet.getString("status"),
+						resultSet.getDate("hiredate"),
+						resultSet.getString("supervisor"),
+						resultSet.getString("jobtitle"),
+						resultSet.getString("description"),
+						resultSet.getString("country"),
+						resultSet.getString("site"),
+						resultSet.getString("clockid"),
+						resultSet.getString("fullname"));
                list.add(e);
             }
 
@@ -279,58 +348,28 @@ public class EmployeeController implements Initializable {
     	return list;
 
     }
+    public ObservableList<Assignation> loadAssignations(String idemployee){
+    	int eeid =Integer.parseInt(idemployee);
+    	listassign.clear();
+    	String sql2 = "SELECT * FROM assignations WHERE idemployee = ?";
+    	try {
+			preparedStatement = con.prepareStatement(sql2);
+			preparedStatement.setInt(1, eeid);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				Assignation a = new Assignation(resultSet.getString("idproduct"),
+						resultSet.getDate("assigndate"),
+						resultSet.getString("brand"),
+						resultSet.getString("model"),
+						resultSet.getString("price"));
+				listassign.add(a);
 
-
-    private Employee createEmployee(ResultSet rs) {
-        Employee e = new Employee();
-        try {
-           e.setfname(rs.getString("fname"));
-           e.setlname(rs.getString("lname"));
-           e.setemail(rs.getString("email"));
-           e.setidemployee(rs.getString("idemployee"));
-           e.setstatus(rs.getString("status"));
-           e.sethiredate(rs.getDate("hiredate"));
-           e.setsupervisor(rs.getString("supervisor"));
-           e.setjobtitle(rs.getString("jobtitle"));
-           e.setdescription(rs.getString("description"));
-           e.setcountry(rs.getString("country"));
-           e.setsite(rs.getString("site"));
-           e.setclockid(rs.getString("clockid"));
-        } catch (SQLException ex) {
-        }
-        return e;
-     }
-
-//    @FXML
-//    public void Import_Employees(MouseEvent event){
-//       	FileChooser file = new FileChooser();
-//    	Node node = (Node) event.getSource();
-//    	Stage stage = (Stage) node.getScene().getWindow();
-//    	if(event.getSource()==btnimportemployees){
-//    		File selectedfile = file.showOpenDialog(stage);
-//    		String path = selectedfile.getAbsolutePath();
-//    		path = path.replace("\\", "\\\\");
-//    		String sql = "LOAD DATA LOCAL INFILE '" + path + "' REPLACE INTO TABLE temp \n FIELDS TERMINATED BY ',' \n ENCLOSED BY '" + '"' + "' \n LINES TERMINATED BY '\\r\\n' \n IGNORE 1 LINES \n" +
-//    		" (fname,lname,email,idemployee,statu,@hiredate,idsupervisor,jobtitle,description,country,site,clockid) \n"+
-//    		"SET hiredate = STR_TO_DATE(@hiredate, '%m/%d/%Y');";
-//        	String spimp = "CALL `inventory`.`sp_import_employees`();";
-//        	try {
-//				preparedStatement = con.prepareStatement(sql);
-//				resultSet = preparedStatement.executeQuery(sql);
-//				preparedStatement = con.prepareStatement(spimp);
-//				resultSet = preparedStatement.executeQuery(spimp);
-//
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
-//
-//
-//
-//    	}
-//
-//
-//    }
-
+			}
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
+    	return listassign;
+    }
 
 }
 

@@ -264,10 +264,10 @@
                   <AnchorPane prefHeight="525.0" prefWidth="175.0" BorderPane.alignment="CENTER">
                      <children>
                         <ScrollPane prefHeight="243.0" prefWidth="200.0" AnchorPane.bottomAnchor="143.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="38.0" />
-                        <TableView layoutX="-1.0" layoutY="38.0" prefHeight="353.0" prefWidth="171.0" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="38.0">
+                        <TableView fx:id="tvEID" layoutX="-1.0" layoutY="38.0" prefHeight="353.0" prefWidth="171.0" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="38.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="EEID" />
-                            <TableColumn prefWidth="100.0" text="Full Name" />
+                            <TableColumn fx:id="tcolEID" prefWidth="75.0" text="EEID" />
+                            <TableColumn fx:id="tcolFullName" prefWidth="100.0" text="Full Name" />
                           </columns>
                         </TableView>
                         <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="150.0">
@@ -372,10 +372,10 @@
                      <children>
                         <VBox layoutX="10.0" layoutY="26.0" prefHeight="157.0" prefWidth="150.0" spacing="15.0" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="10.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Assign Equipment" />
-                              <Button mnemonicParsing="false" text="Receive Equipment" />
-                              <Button mnemonicParsing="false" text="Decommision Equipment" />
-                              <Button mnemonicParsing="false" text="New Log" />
+                              <Button fx:id="btnAssign" mnemonicParsing="false" text="Assign Equipment" />
+                              <Button fx:id="btnReceive" mnemonicParsing="false" text="Receive Equipment" />
+                              <Button fx:id="btnDecomm" mnemonicParsing="false" text="Decommision Equipment" />
+                              <Button fx:id="btnLog" mnemonicParsing="false" text="New Log" />
                            </children>
                         </VBox>
                         <VBox layoutX="193.0" prefHeight="200.0" prefWidth="660.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -407,13 +407,13 @@
                                  <children>
                                     <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="168.0" prefWidth="368.0">
                                        <content>
-                                          <TableView prefHeight="165.0" prefWidth="366.0">
+                                          <TableView fx:id="tvassignations" prefHeight="165.0" prefWidth="366.0">
                                             <columns>
-                                              <TableColumn prefWidth="59.66668701171875" text="Serial" />
-                                              <TableColumn prefWidth="77.0" text="Assigned" />
-                                                <TableColumn prefWidth="70.66668701171875" text="Brand" />
-                                                <TableColumn prefWidth="72.0" text="Model" />
-                                                <TableColumn prefWidth="82.666748046875" text="Price" />
+                                              <TableColumn fx:id="tcolidproduct" prefWidth="59.66668701171875" text="Serial" />
+                                              <TableColumn fx:id="tcolassigndate" prefWidth="77.0" text="Assigned" />
+                                                <TableColumn fx:id="tcolbrand" prefWidth="70.66668701171875" text="Brand" />
+                                                <TableColumn fx:id="tcolmodel" prefWidth="72.0" text="Model" />
+                                                <TableColumn fx:id="tcolprice" prefWidth="82.666748046875" text="Price" />
                                             </columns>
                                           </TableView>
                                        </content>
@@ -423,7 +423,7 @@
                                     </ScrollPane>
                                     <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="168.0" prefWidth="263.0">
                                        <content>
-                                          <TableView prefHeight="165.0" prefWidth="268.0">
+                                          <TableView fx:id="tvactivitylog" prefHeight="165.0" prefWidth="268.0">
                                             <columns>
                                               <TableColumn prefWidth="48.3333740234375" text="Date" />
                                               <TableColumn prefWidth="64.6666259765625" text="Comment" />

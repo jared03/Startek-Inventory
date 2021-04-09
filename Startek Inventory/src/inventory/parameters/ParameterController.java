@@ -1,10 +1,12 @@
 package inventory.parameters;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import inventory.utilities.DBConn;
@@ -16,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class ParameterController implements Initializable {
@@ -43,6 +46,8 @@ public class ParameterController implements Initializable {
     private Button btnInventory;
     @FXML
     private Button btnNetwork;
+    @FXML
+    private Button btnimportemployees;
 
     private double xOffset = 0;
     private double yOffset = 0;
@@ -161,6 +166,36 @@ public class ParameterController implements Initializable {
             }
     	}
     }
+
+    @FXML
+    public void Import_Employees(MouseEvent event){
+     	FileChooser file = new FileChooser();
+  	Node node = (Node) event.getSource();
+  	Stage stage = (Stage) node.getScene().getWindow();
+  	if(event.getSource()==btnimportemployees){
+  		File selectedfile = file.showOpenDialog(stage);
+  		String path = selectedfile.getAbsolutePath();
+  		path = path.replace("\\", "\\\\");
+  		String sql = "LOAD DATA LOCAL INFILE '" + path + "' REPLACE INTO TABLE temp \n FIELDS TERMINATED BY ',' \n ENCLOSED BY '" + '"' + "' \n LINES TERMINATED BY '\\r\\n' \n IGNORE 1 LINES \n" +
+  		" (fname,lname,email,idemployee,statu,@hiredate,idsupervisor,jobtitle,description,country,site,clockid) \n"+
+  		"SET hiredate = STR_TO_DATE(@hiredate, '%m/%d/%Y');";
+      	String spimp = "CALL `inventory`.`sp_import_employees`();";
+      	try {
+				preparedStatement = con.prepareStatement(sql);
+				resultSet = preparedStatement.executeQuery(sql);
+				preparedStatement = con.prepareStatement(spimp);
+				resultSet = preparedStatement.executeQuery(spimp);
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+
+
+  	}
+
+
+  }
 
     public ParameterController(){
     	con = DBConn.conDB();

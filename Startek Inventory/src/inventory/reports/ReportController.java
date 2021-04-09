@@ -29,6 +29,8 @@ public class ReportController implements Initializable {
 	Connection con = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
+    PreparedStatement preparedStatement2 = null;
+    ResultSet resultSet2 = null;
 
     @FXML
     private AnchorPane parent;
@@ -72,7 +74,22 @@ public class ReportController implements Initializable {
     	});
 
 
-    	getTables();
+    	TreeItem<String> rootItem = new TreeItem<String> ("Database");
+    	String sql = "Select * From table_names";
+
+    	try {
+			preparedStatement = con.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery(sql);
+			while (resultSet.next()) {
+				TreeItem<String> item = new TreeItem<String> (resultSet.getString("table_name"));
+				rootItem.getChildren().add(item);
+				addNodes(item);
+            }
+
+			tvDB.setRoot(rootItem);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -177,19 +194,15 @@ public class ReportController implements Initializable {
     	}
     }
 
-    public void getTables(){
-    	TreeItem<String> rootItem = new TreeItem<String> ("Database");
-    	String sql = "Select * From table_names";
-    	try {
-			preparedStatement = con.prepareStatement(sql);
-			resultSet = preparedStatement.executeQuery(sql);
-			while (resultSet.next()) {
-				TreeItem<String> item = new TreeItem<String> (resultSet.getString("table_name"));
-				rootItem.getChildren().add(item);
-            }
-			tvDB = new TreeView<String> (rootItem);
-		} catch (SQLException e) {
-			e.printStackTrace();
+    public void addNodes(TreeItem<String> item) throws SQLException{
+    	String sql2 = "Select * From column_names";
+    	preparedStatement2 = con.prepareStatement(sql2);
+		resultSet2 = preparedStatement2.executeQuery(sql2);
+    	while(resultSet2.next()){
+			if(item.getValue().contentEquals(resultSet2.getString("table_name"))){
+				TreeItem<String> item2 = new TreeItem<String> (resultSet2.getString("column_name"));
+				item.getChildren().add(item2);
+			}
 		}
     }
 
