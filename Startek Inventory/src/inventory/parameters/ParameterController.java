@@ -3,10 +3,12 @@ package inventory.parameters;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ResourceBundle;
 
 import inventory.utilities.DBConn;
@@ -15,7 +17,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
@@ -25,6 +29,7 @@ public class ParameterController implements Initializable {
 
 	Connection con = null;
     PreparedStatement preparedStatement = null;
+    CallableStatement preparedcall = null;
     ResultSet resultSet = null;
     @FXML
     private AnchorPane parent;
@@ -173,25 +178,39 @@ public class ParameterController implements Initializable {
   	Node node = (Node) event.getSource();
   	Stage stage = (Stage) node.getScene().getWindow();
   	if(event.getSource()==btnimportemployees){
-  		File selectedfile = file.showOpenDialog(stage);
-  		String path = selectedfile.getAbsolutePath();
-  		path = path.replace("\\", "\\\\");
-  		String sql = "LOAD DATA LOCAL INFILE '" + path + "' REPLACE INTO TABLE temp \n FIELDS TERMINATED BY ',' \n ENCLOSED BY '" + '"' + "' \n LINES TERMINATED BY '\\r\\n' \n IGNORE 1 LINES \n" +
-  		" (fname,lname,email,idemployee,statu,@hiredate,idsupervisor,jobtitle,description,country,site,clockid) \n"+
-  		"SET hiredate = STR_TO_DATE(@hiredate, '%m/%d/%Y');";
-      	String spimp = "CALL `inventory`.`sp_import_employees`();";
-      	try {
-				preparedStatement = con.prepareStatement(sql);
-				resultSet = preparedStatement.executeQuery(sql);
-				preparedStatement = con.prepareStatement(spimp);
-				resultSet = preparedStatement.executeQuery(spimp);
+  		try{
+	  		File selectedfile = file.showOpenDialog(stage);
+	  		String path = selectedfile.getAbsolutePath();
+	  		path = path.replace("\\", "\\\\");
+	  		String sql = "LOAD DATA LOCAL INFILE '" + path + "' REPLACE INTO TABLE temp \n FIELDS TERMINATED BY ',' \n ENCLOSED BY '" + '"' + "' \n LINES TERMINATED BY '\\r\\n' \n IGNORE 1 LINES \n" +
+	  		" (fname,lname,email,idemployee,statu,@hiredate,idsupervisor,jobtitle,description,country,site,clockid) \n"+
+	  		"SET hiredate = STR_TO_DATE(@hiredate, '%m/%d/%Y');";
+	      	String spimp = "{CALL inventory.sp_import_employees(?)}";
+	      	try {
+					preparedStatement = con.prepareStatement(sql);
+					resultSet = preparedStatement.executeQuery(sql);
+					preparedcall = con.prepareCall(spimp);
+					preparedcall.registerOutParameter(1, Types.VARCHAR);
+					preparedcall.execute();
 
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+					String message = preparedcall.getString(1);
+
+					Alert a = new Alert(AlertType.INFORMATION);
+					a.setHeaderText(null);
+					a.setContentText(message);
+					a.showAndWait();
 
 
-
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+  		}
+  		catch(NullPointerException e){
+  			Alert a = new Alert(AlertType.INFORMATION);
+			a.setHeaderText(null);
+			a.setContentText("Please select a file to import");
+			a.showAndWait();
+  		}
   	}
 
 

@@ -69,3 +69,28 @@
 	-fx-background-color: #363636;
 
 }
+.chart{
+	-fx-pie-label-visible:true;
+	-fx-label-line-lenght:1;
+	-fx-legend-side:bottom;
+	-fx-font-size: 1em;
+	-fx-background-color: lightgray;
+}
+.chart-pie-label{
+	-fx-fill: black;
+	-fx-font-size: 1em;
+}
+.chart-content{
+	-fx-padding: 2;
+}
+.default-color0.chart-pie{
+	-fx-pie-color:deepskyblue;
+}
+.default-color1.chart-pie{
+	-fx-pie-color:navy;
+}
+.chart-legend{
+	-fx-background-color:darkgray;
+	-fx-border-color:black;
+	-fx-border-width:2;
+}

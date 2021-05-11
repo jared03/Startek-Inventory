@@ -137,20 +137,26 @@
                            <font>
                               <Font size="15.0" />
                            </font>
+                           <VBox.margin>
+                              <Insets left="5.0" />
+                           </VBox.margin>
                         </Label>
                         <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="108.0" prefWidth="823.0">
                            <content>
-                              <TableView snapToPixel="false">
+                              <TableView fx:id="tvalerts" snapToPixel="false">
                                  <columns>
-                                    <TableColumn prefWidth="79.0" text="EEID" />
-                                    <TableColumn prefWidth="143.0" text="Full Name" />
-                                    <TableColumn minWidth="-Infinity" prefWidth="110.0" text="Employee Status" />
-                                    <TableColumn prefWidth="191.0" text="Supervisior" />
-                                    <TableColumn prefWidth="111.0" text="Program" />
-                                    <TableColumn prefWidth="173.0" text="Equipment Status" />
+                                    <TableColumn fx:id="tcoleeid" prefWidth="79.0" text="EEID" />
+                                    <TableColumn fx:id="tcolfullname" prefWidth="143.0" text="Full Name" />
+                                    <TableColumn fx:id="tcolempstat" minWidth="-Infinity" prefWidth="110.0" text="Employee Status" />
+                                    <TableColumn fx:id="tcolsupervisor" prefWidth="191.0" text="Supervisior" />
+                                    <TableColumn fx:id="tcolprogram" prefWidth="111.0" text="Program" />
+                                    <TableColumn fx:id="tcolalertstatus" prefWidth="173.0" text="Equipment Status" />
                                  </columns>
                               </TableView>
                            </content>
+                           <VBox.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </VBox.margin>
                         </ScrollPane>
                      </children>
                   </VBox>
@@ -158,15 +164,27 @@
                <center>
                   <AnchorPane prefHeight="266.0" prefWidth="824.0" BorderPane.alignment="CENTER">
                      <children>
-                        <PieChart layoutX="107.0" layoutY="23.0" legendVisible="false" prefHeight="170.0" prefWidth="250.0" title="WFH vs On SIte" AnchorPane.leftAnchor="107.0" AnchorPane.rightAnchor="467.0" />
-                        <PieChart layoutX="486.0" layoutY="16.0" legendVisible="false" prefHeight="170.0" prefWidth="250.0" title="Equipment Lost vs Returned" AnchorPane.rightAnchor="88.0" />
+                        <HBox layoutX="14.0" layoutY="23.0" prefHeight="170.0" prefWidth="800.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="19.0">
+                           <children>
+                              <PieChart fx:id="pcwfh" prefHeight="170.0" prefWidth="353.0" stylesheets="@../utilities/stylesheet.css" title="WFH vs On Site">
+                                 <HBox.margin>
+                                    <Insets right="50.0" />
+                                 </HBox.margin>
+                              </PieChart>
+                              <PieChart fx:id="pclostequipment" prefHeight="170.0" prefWidth="348.0" title="Equipment Lost vs Returned">
+                                 <HBox.margin>
+                                    <Insets left="50.0" />
+                                 </HBox.margin>
+                              </PieChart>
+                           </children>
+                        </HBox>
                      </children>
                   </AnchorPane>
                </center>
                <bottom>
                   <AnchorPane prefHeight="176.0" prefWidth="824.0" BorderPane.alignment="CENTER">
                      <children>
-                        <BarChart layoutX="34.0" prefHeight="154.0" prefWidth="668.0" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="122.0">
+                        <BarChart fx:id="bcinventory" layoutX="14.0" prefHeight="154.0" prefWidth="800.0" title="Inventory Available per Site" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="18.0">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>

@@ -7,11 +7,14 @@ package inventory.login;
  */
 import java.io.IOException;
 import java.net.URL;
+import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ResourceBundle;
+
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,6 +30,9 @@ import inventory.utilities.DBConn;
 
 
 public class LoginController implements Initializable {
+
+	public static String USER_NAME;
+	public static String PRIVILEGE;
 
     @FXML
     private Label lblErrors;
@@ -48,7 +54,7 @@ public class LoginController implements Initializable {
 
     /// --
     Connection con = null;
-    PreparedStatement preparedStatement = null;
+    CallableStatement preparedcall = null;
     ResultSet resultSet = null;
 
     @FXML
@@ -106,24 +112,31 @@ public class LoginController implements Initializable {
         String password = txtPassword.getText();
 
         //query
-        String sql = "SELECT * FROM login Where username = ? and password = ?";
+        String sql = "{CALL sp_user_login(?,?,?,?)}";
 
         try {
         	if (!user.isEmpty()) {
         		if (!password.isEmpty()){
-        			preparedStatement = con.prepareStatement(sql);
-        			preparedStatement.setString(1, user);
-        			preparedStatement.setString(2, password);
-        			resultSet = preparedStatement.executeQuery();
-        			if (!resultSet.next()) {
+        			preparedcall = con.prepareCall(sql);
+        			preparedcall.setString(1, user);
+        			preparedcall.setString(2, password);
+        			preparedcall.registerOutParameter(3, Types.VARCHAR);
+        			preparedcall.registerOutParameter(4, Types.VARCHAR);
+        			preparedcall.execute();
+
+        			String message = preparedcall.getString(4);
+
+        			if (message.contentEquals("UNAUTHORIZE")) {
         				lblErrors.setTextFill(Color.TOMATO);
         				lblErrors.setText("Enter Correct username or password");
         				System.err.println("Wrong Logins --///");
         				return "Error";
 
-        			} else {
+        			} else if(message.contentEquals("AUTHORIZE")) {
         				lblErrors.setTextFill(Color.GREEN);
         				lblErrors.setText("Login Successful..Redirecting..");
+        				USER_NAME = user;
+        				PRIVILEGE = preparedcall.getString(3);
         				System.out.println("Successfull Login");
         				return "Success";
         			}
@@ -146,6 +159,7 @@ public class LoginController implements Initializable {
             System.err.println(ex.getMessage());
             return "Exception";
         }
+		return "Error";
 
     }
 

@@ -24,6 +24,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+    	/*Main main =new Main();
+    	Thread thread = new Thread(main);
+    	thread.start();*/
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
         //removes default windows utilites.
         stage.initStyle(StageStyle.UNDECORATED);
@@ -58,5 +61,15 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+	/*@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		System.out.println("Loading employees...");
+		EmployeeController ec = new EmployeeController();
+		ec.initialize();
+		System.out.println("Employees load to list");
+
+	}*/
 
 }

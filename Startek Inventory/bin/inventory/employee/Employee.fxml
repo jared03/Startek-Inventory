@@ -126,15 +126,39 @@
                </children>
             </GridPane>
             <BorderPane layoutY="90.0" prefHeight="525.0" prefWidth="824.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
-               <left>
-                  <AnchorPane prefHeight="500.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+               <right>
+                  <AnchorPane prefHeight="385.0" prefWidth="211.0" BorderPane.alignment="CENTER">
                      <children>
-                        <ImageView fx:id="imgemployee" fitHeight="130.0" fitWidth="119.0" layoutX="47.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="14.0">
-                           <image>
-                              <Image url="@../images/default_employee.png" />
-                           </image>
-                        </ImageView>
-                        <VBox layoutX="6.0" layoutY="140.0" prefHeight="284.0" prefWidth="200.0">
+                        <ScrollPane prefHeight="243.0" prefWidth="200.0" AnchorPane.bottomAnchor="143.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="38.0" />
+                        <TableView fx:id="tvEID" layoutX="-1.0" layoutY="38.0" prefHeight="353.0" prefWidth="171.0" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="38.0">
+                          <columns>
+                            <TableColumn fx:id="tcolEID" prefWidth="75.0" text="EEID" />
+                            <TableColumn fx:id="tcolFullName" prefWidth="135.0" text="Full Name" />
+                          </columns>
+                        </TableView>
+                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="150.0">
+                           <children>
+                              <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="20" />
+                              <TextField fx:id="idfilter" prefHeight="40.0" prefWidth="276.0" promptText="EEID or Name" style="-fx-background-color: transparent; -fx-text-fill: #fff;" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Calibri Light" size="14.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                     <BorderPane.margin>
+                        <Insets right="5.0" />
+                     </BorderPane.margin>
+                  </AnchorPane>
+               </right>
+               <center>
+                  <AnchorPane prefHeight="385.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <VBox layoutX="11.0" layoutY="133.0" prefHeight="253.0" prefWidth="397.0">
                            <children>
                               <HBox>
                                  <children>
@@ -152,6 +176,9 @@
                                        </HBox.margin>
                                     </Label>
                                  </children>
+                                 <VBox.margin>
+                                    <Insets left="40.0" />
+                                 </VBox.margin>
                               </HBox>
                               <HBox>
                                  <children>
@@ -169,6 +196,9 @@
                                        </HBox.margin>
                                     </Label>
                                  </children>
+                                 <VBox.margin>
+                                    <Insets left="40.0" />
+                                 </VBox.margin>
                               </HBox>
                               <HBox>
                                  <children>
@@ -186,6 +216,9 @@
                                        </HBox.margin>
                                     </Label>
                                  </children>
+                                 <VBox.margin>
+                                    <Insets left="40.0" />
+                                 </VBox.margin>
                               </HBox>
                               <HBox>
                                  <children>
@@ -203,6 +236,9 @@
                                        </HBox.margin>
                                     </Label>
                                  </children>
+                                 <VBox.margin>
+                                    <Insets left="40.0" />
+                                 </VBox.margin>
                               </HBox>
                               <HBox>
                                  <children>
@@ -220,6 +256,9 @@
                                        </HBox.margin>
                                     </Label>
                                  </children>
+                                 <VBox.margin>
+                                    <Insets left="40.0" />
+                                 </VBox.margin>
                               </HBox>
                               <HBox>
                                  <children>
@@ -237,6 +276,9 @@
                                        </HBox.margin>
                                     </Label>
                                  </children>
+                                 <VBox.margin>
+                                    <Insets left="40.0" />
+                                 </VBox.margin>
                               </HBox>
                               <HBox>
                                  <children>
@@ -254,44 +296,15 @@
                                        </HBox.margin>
                                     </Label>
                                  </children>
+                                 <VBox.margin>
+                                    <Insets left="40.0" />
+                                 </VBox.margin>
                               </HBox>
                            </children>
                         </VBox>
-                     </children>
-                  </AnchorPane>
-               </left>
-               <right>
-                  <AnchorPane prefHeight="525.0" prefWidth="175.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <ScrollPane prefHeight="243.0" prefWidth="200.0" AnchorPane.bottomAnchor="143.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="38.0" />
-                        <TableView fx:id="tvEID" layoutX="-1.0" layoutY="38.0" prefHeight="353.0" prefWidth="171.0" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="38.0">
-                          <columns>
-                            <TableColumn fx:id="tcolEID" prefWidth="75.0" text="EEID" />
-                            <TableColumn fx:id="tcolFullName" prefWidth="100.0" text="Full Name" />
-                          </columns>
-                        </TableView>
-                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="150.0">
+                        <VBox layoutX="182.0" layoutY="14.0" prefHeight="149.0" prefWidth="359.0" AnchorPane.bottomAnchor="237.0" AnchorPane.leftAnchor="182.0" AnchorPane.topAnchor="14.0">
                            <children>
-                              <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="20" />
-                              <TextField fx:id="idfilter" prefHeight="40.0" prefWidth="276.0" promptText="EEID or Name" style="-fx-background-color: transparent; -fx-text-fill: #fff;" HBox.hgrow="ALWAYS">
-                                 <font>
-                                    <Font name="Calibri Light" size="14.0" />
-                                 </font>
-                              </TextField>
-                           </children>
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding>
-                        </HBox>
-                     </children>
-                  </AnchorPane>
-               </right>
-               <center>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <VBox layoutX="14.0" layoutY="14.0" prefHeight="177.0" prefWidth="444.0" AnchorPane.bottomAnchor="234.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
-                           <children>
-                              <HBox>
+                              <HBox prefHeight="35.0" prefWidth="359.0">
                                  <children>
                                     <Label lineSpacing="40.0" prefHeight="40.0" text="First Name:" textFill="WHITE">
                                        <font>
@@ -307,6 +320,9 @@
                                        </HBox.margin>
                                     </Label>
                                  </children>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
                               </HBox>
                               <HBox>
                                  <children>
@@ -324,6 +340,9 @@
                                        </HBox.margin>
                                     </Label>
                                  </children>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
                               </HBox>
                               <HBox>
                                  <children>
@@ -341,6 +360,9 @@
                                        </HBox.margin>
                                     </Label>
                                  </children>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
                               </HBox>
                               <HBox>
                                  <children>
@@ -364,6 +386,21 @@
                               <Insets bottom="50.0" />
                            </padding>
                         </VBox>
+                        <Label fx:id="lbleeid" textFill="#525252">
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="imgemployee" fitHeight="130.0" fitWidth="119.0" layoutX="48.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="441.0" AnchorPane.topAnchor="14.0">
+                           <image>
+                              <Image url="@../images/default_employee.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="lblempstat" alignment="CENTER" contentDisplay="CENTER" layoutX="308.0" layoutY="-9.0" prefHeight="25.0" prefWidth="200.0" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </center>
@@ -372,10 +409,10 @@
                      <children>
                         <VBox layoutX="10.0" layoutY="26.0" prefHeight="157.0" prefWidth="150.0" spacing="15.0" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="10.0">
                            <children>
-                              <Button fx:id="btnAssign" mnemonicParsing="false" text="Assign Equipment" />
-                              <Button fx:id="btnReceive" mnemonicParsing="false" text="Receive Equipment" />
-                              <Button fx:id="btnDecomm" mnemonicParsing="false" text="Decommision Equipment" />
-                              <Button fx:id="btnLog" mnemonicParsing="false" text="New Log" />
+                              <Button fx:id="btnAssign" mnemonicParsing="false" onAction="#Button_Action" prefHeight="25.0" prefWidth="152.0" text="Assign Equipment" />
+                              <Button fx:id="btnReceive" mnemonicParsing="false" onAction="#Button_Action" prefHeight="25.0" prefWidth="151.0" text="Receive Equipment" />
+                              <Button fx:id="btnDecomm" mnemonicParsing="false" onAction="#Button_Action" text="Decommision Equipment" />
+                              <Button fx:id="btnLog" mnemonicParsing="false" onAction="#Button_Action" prefHeight="25.0" prefWidth="151.0" text="New Log" />
                            </children>
                         </VBox>
                         <VBox layoutX="193.0" prefHeight="200.0" prefWidth="660.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -418,20 +455,23 @@
                                           </TableView>
                                        </content>
                                        <HBox.margin>
-                                          <Insets right="10.0" />
+                                          <Insets bottom="5.0" right="10.0" />
                                        </HBox.margin>
                                     </ScrollPane>
                                     <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="168.0" prefWidth="263.0">
                                        <content>
                                           <TableView fx:id="tvactivitylog" prefHeight="165.0" prefWidth="268.0">
                                             <columns>
-                                              <TableColumn prefWidth="48.3333740234375" text="Date" />
-                                              <TableColumn prefWidth="64.6666259765625" text="Comment" />
-                                                <TableColumn prefWidth="56.6666259765625" text="Type" />
-                                                <TableColumn prefWidth="86.3333740234375" text="Performed" />
+                                              <TableColumn fx:id="tcolactdate" prefWidth="48.3333740234375" text="Date" />
+                                              <TableColumn fx:id="tcolactcomment" prefWidth="64.6666259765625" text="Comment" />
+                                                <TableColumn fx:id="tcolacttype" prefWidth="56.6666259765625" text="Type" />
+                                                <TableColumn fx:id="tcolactperformed" prefWidth="86.3333740234375" text="Performed" />
                                             </columns>
                                           </TableView>
                                        </content>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" right="5.0" />
+                                       </HBox.margin>
                                     </ScrollPane>
                                  </children>
                               </HBox>
